@@ -1,4 +1,6 @@
-﻿System.Console.Write("Enter the number of employees: ");
+﻿using System.Globalization;
+
+System.Console.Write("Enter the number of employees: ");
 var answer = int.Parse(Console.ReadLine());
 var counter = 1;
 
@@ -17,12 +19,12 @@ while (counter <= answer)
   var hours = int.Parse(Console.ReadLine());
   
   System.Console.Write("Value per hour: ");
-  var valuePerHour = double.Parse(Console.ReadLine());
+  var valuePerHour = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
   
   if (outsourced.ToLower() == "y")
   {
     System.Console.Write("Additional charge: ");
-    var additionalCharge = double.Parse(Console.ReadLine());
+    var additionalCharge = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
     var employee = new OutsourcedEmployee(name, hours, valuePerHour, additionalCharge);
 
     employees.Add(employee);
@@ -39,5 +41,5 @@ while (counter <= answer)
 System.Console.WriteLine("PAYMENTS:");
 foreach(var employee in employees)
 {
-  System.Console.WriteLine($"{employee.Name} - {employee.Payment():F2}");
+  System.Console.WriteLine($"{employee.Name} - {employee.Payment().ToString("F2", CultureInfo.InvariantCulture)}");
 }
